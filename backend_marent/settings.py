@@ -30,7 +30,10 @@ SECRET_KEY = 'django-insecure-0p2_ex5i6te8s7j9+voeoj=&-j!36qa59rfm)ln5(-g(hi^r1r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "marentbackend-production.up.railway.app",
+]
+
 
 
 # settings.py
@@ -97,6 +100,7 @@ REST_FRAMEWORK = {
 # OR you might have even removed REST_FRAMEWORK completely
 # Update CORS settings
 CORS_ALLOWED_ORIGINS = [
+    "https://www.marent.ma/",
     "http://localhost:8080",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
