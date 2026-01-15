@@ -100,12 +100,12 @@ REST_FRAMEWORK = {
 # OR you might have even removed REST_FRAMEWORK completely
 # Update CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://www.marent.ma/",
+    "marent.ma",
     "http://localhost:8080",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8080",
-]
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "http://127.0.0.1:8080",
+# ]
 
 # Add these for better CORS support
 CORS_ALLOW_CREDENTIALS = True
