@@ -1,5 +1,5 @@
 import logging
-from datetime import date
+from datetime import date, datetime, timedelta
 
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.password_validation import validate_password
@@ -13,7 +13,9 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext as _
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError, AccessToken
+
+
 
 from .models import ROLE_CHOICES
 from .utils import Util
@@ -57,11 +59,34 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        password = validated_data.pop('password')
+        password = validated_data.pop("password")
         user = User.objects.create_user(password=password, **validated_data)
-        request = self.context.get('request')
-        Util.send_email_verification(request, user)
+
+        #domaine = "https://marent.ma"
+        #domaine = "http://localhost:8000"
+        domaine = "http://207.154.205.225:8000"
+
+        token_obj = AccessToken.for_user(user)
+        token_obj.set_exp(from_time=datetime.utcnow(), lifetime=timedelta(days=30))
+        token_obj["email"] = user.email
+
+        token = str(token_obj)
+
+        relative_link = reverse("verify-email")
+        #relative_link = reverse("email-verify")
+        abs_url = f"{domaine}{relative_link}?token={token}"
+
+        Util.send_email_verification(user, None, abs_url)
+
         return user
+
+#    def create(self, validated_data):
+ #       password = validated_data.pop('password')
+  #      user = User.objects.create_user(password=password, **validated_data)
+   #     request = self.context.get('request')
+    #    Util.send_email_verification(request, user)
+     #   return user
+
 
 class EmailVerificationSerializer(serializers.Serializer):
     """

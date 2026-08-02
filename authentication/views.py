@@ -175,14 +175,16 @@ class ResendVerification(generics.GenericAPIView):
             
             if user.is_verified:
                 return Response({'erreur': _("L'utilisateur est déjà vérifié.")}, status=status.HTTP_400_BAD_REQUEST)
-            domaine = "https://marent.ma"
+            #domaine = "https://marent.ma"
             #domaine = "http://localhost:8000"
+            domaine = "http://207.154.205.225:8000"
             #token = RefreshToken.for_user(user).access_token
             token_obj = AccessToken.for_user(user)
             token_obj.set_exp(from_time=datetime.utcnow(), lifetime=timedelta(days=30))  # custom 30-day lifetime
             token_obj['email'] = user.email
             token = str(token_obj)
-            relative_link = reverse('email-verify')
+            relative_link = reverse("verify-email")
+            #relative_link = reverse('email-verify')
             abs_url = f'{domaine}{relative_link}?token={token}'
 
             Util.send_email_verification(user, None, abs_url)

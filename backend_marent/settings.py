@@ -31,7 +31,10 @@ SECRET_KEY = 'django-insecure-0p2_ex5i6te8s7j9+voeoj=&-j!36qa59rfm)ln5(-g(hi^r1r
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "marentbackend-production.up.railway.app",
+    #"marentbackend-production.up.railway.app",
+    "localhost",
+    "127.0.0.1",
+    "207.154.205.225",
 ]
 
 
@@ -131,16 +134,30 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+#MIDDLEWARE = [
+    #'django.middleware.security.SecurityMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.common.CommonMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
+   # 'django.contrib.messages.middleware.MessageMiddleware',
+  #  'django.middleware.clickjacking.XFrameOptionsMiddleware',
+ #   'corsheaders.middleware.CorsMiddleware',
+#]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
+
 
 
 ROOT_URLCONF = 'backend_marent.urls'
@@ -148,7 +165,7 @@ ROOT_URLCONF = 'backend_marent.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
