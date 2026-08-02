@@ -89,7 +89,18 @@ venv\Scripts\activate
 
 ---
 
-### Install dependencies
+
+
+## System Requirements (Ubuntu)
+
+Install the required system packages:
+
+```bash
+sudo apt update
+sudo apt install libpq-dev python3-dev build-essential
+```
+
+### Then install the Python dependencies:
 
 ```bash
 pip install -r requirements.txt
