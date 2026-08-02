@@ -36,13 +36,13 @@ It provides authentication, user management, and item management for a platform 
 
 ```
 marent-backend/
-├── accounts/
-├── listings/
-├── users/
-├── media/
-├── config/
-├── requirements.txt
+├── authentication/
+├── backend_marent/
+├── listing_system/
 ├── manage.py
+├── media/
+├── requirements.txt
+├── staticfiles.py
 └── ...
 ```
 
@@ -62,7 +62,7 @@ marent-backend/
 ### Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/marent-backend.git
+git clone https://github.com/issame01/marent-backend.git
 
 cd marent-backend
 ```
@@ -88,7 +88,6 @@ venv\Scripts\activate
 ```
 
 ---
-
 
 
 ## System Requirements (Ubuntu)
@@ -125,9 +124,6 @@ DATABASE_URL=postgres://username:password@localhost:5432/marent
 
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
-
-> Do **not** commit your real `.env` file.
-
 ---
 
 ### Apply migrations
@@ -166,7 +162,7 @@ The frontend application is available in the companion repository:
 
 **Marent Frontend**
 
-https://github.com/<your-username>/marent
+https://github.com/issame01/Marent_Frontend
 
 ---
 
@@ -176,15 +172,14 @@ Example endpoints:
 
 | Method | Endpoint | Description |
 |---------|----------|-------------|
-| POST | `/api/auth/register/` | Register a user |
-| POST | `/api/auth/login/` | Login |
-| GET | `/api/items/` | List items |
-| POST | `/api/items/` | Create an item |
-| GET | `/api/items/<id>/` | Retrieve an item |
-| PUT | `/api/items/<id>/` | Update an item |
-| DELETE | `/api/items/<id>/` | Delete an item |
-
-*(Update these endpoints to match your project.)*
+| POST | `/api/authentication/register/` | Register a user |
+| POST | `/api/authentication/login/` | Login |
+| GET | `/api/authentication/verify-email` | Email verification |
+| GET | `/api/profile/<str:username>//` | View profile |
+| PUT | `/api/profile/update/` | Update profile|
+| GET | `/api2/listings/` | View listing items |
+| POST | `/api2/listings/create/` | Create an item |
+| DELETE | `/api2/listings/<int:id>/delete/` | Delete an item |
 
 ---
 
