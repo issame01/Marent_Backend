@@ -25,18 +25,19 @@ environ.Env.read_env(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0p2_ex5i6te8s7j9+voeoj=&-j!36qa59rfm)ln5(-g(hi^r1r'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = [
-    #"marentbackend-production.up.railway.app",
-    "localhost",
-    "127.0.0.1",
-    "207.154.205.225",
-]
 
+
+
+
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=["127.0.0.1", "localhost"]
+)
 
 
 # settings.py
@@ -104,11 +105,15 @@ REST_FRAMEWORK = {
 # Update CORS settings
 
 
-CORS_ALLOWED_ORIGINS = [
-    "https://marent.ma",
-    "https://www.marent.ma",
-    "http://localhost:8080",
-]
+CORS_ALLOWED_ORIGINS = env.list(
+    "CORS_ALLOWED_ORIGINS",
+    default=[
+        "https://marent.ma",
+        "https://www.marent.ma",
+        "http://localhost:8080",
+    ],
+)
+
 
 # Add these for better CORS support
 CORS_ALLOW_CREDENTIALS = True
@@ -181,17 +186,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend_marent.wsgi.application'
 AUTH_USER_MODEL = 'authentication.User'
 
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME', default='marent_db'),
-        'USER': env('DB_USER', default='marent_user'),
-        'PASSWORD': env('DB_PASSWORD', default='Qwerty@26'),
-        'HOST': env('DB_HOST', default='localhost'),
-        'PORT': env('DB_PORT', default='5432'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
+
+
 
 
 CHANNEL_LAYERS = {
