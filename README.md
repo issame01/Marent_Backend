@@ -8,6 +8,27 @@ It provides authentication, user management, and item management for a platform 
 
 ---
 
+## Architecture
+
+```
+Client
+   │
+   ▼
+ Nginx
+   │
+   ▼
+Gunicorn
+   │
+   ▼
+ Django REST API
+   │
+   ▼
+PostgreSQL
+```
+
+
+
+
 ## Features
 
 - User authentication
@@ -31,6 +52,26 @@ It provides authentication, user management, and item management for a platform 
 - Gunicorn
 
 ---
+
+## Deployment
+
+The backend has been deployed on an Ubuntu VPS using a production-ready setup.
+
+### Deployment Stack
+
+- Ubuntu Server
+- Gunicorn (WSGI application server)
+- Nginx (Reverse Proxy)
+- PostgreSQL
+- systemd service for Gunicorn process management
+
+### Production Highlights
+
+- Reverse proxy configured with Nginx
+- Gunicorn managed as a systemd service
+- PostgreSQL database hosted on the server
+- REST API accessible over HTTP
+- Static and media files served through Nginx
 
 ## Project Structure
 
@@ -195,7 +236,13 @@ Developing Marent Backend helped me strengthen my understanding of:
 - Database modeling
 - File uploads
 - CORS configuration
-- Deployment
+- Linux server administration
+- Production deployment with Gunicorn
+- Reverse proxy configuration using Nginx
+- Managing services with systemd
+- PostgreSQL administration
+- Environment configuration
+- REST API deployment
 
 ---
 
@@ -203,13 +250,15 @@ Developing Marent Backend helped me strengthen my understanding of:
 
 Some planned features include:
 
-- JWT authentication
+- HTTPS with Let's Encrypt
+- Docker deployment
+- CI/CD pipeline (GitHub Actions)
+- API documentation (Swagger/OpenAPI)
 - Real-time chat
 - Ratings and reviews
 - Notifications
 - Recommendation system
 - Payment integration
-- API documentation (Swagger/OpenAPI)
 
 ---
 
